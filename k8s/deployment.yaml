@@ -1,0 +1,46 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smart-job-portal
+  labels:
+    app: smart-job-portal
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: smart-job-portal
+  template:
+    metadata:
+      labels:
+        app: smart-job-portal
+    spec:
+      containers:
+        - name: smart-job-portal
+          image: ghcr.io/skit-devops-2026/devops-24ESKCS016:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "3000"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
