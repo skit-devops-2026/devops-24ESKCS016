@@ -184,3 +184,5 @@ The suite validates:
 ### Milestone 7 · Kubernetes Orchestration
 - Declarative Deployment manifest (`k8s/deployment.yaml`) with 2 replicas, resource limits, and readiness/liveness probes.
 - NodePort Service manifest (`k8s/service.yaml`) exposing port 3000 through cluster port 30080.
+## Live URL
+https://devops-24eskcs016.onrender.com
